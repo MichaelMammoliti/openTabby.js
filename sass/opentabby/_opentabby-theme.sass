@@ -1,0 +1,52 @@
+$main-color: #8CEE8C
+$bg-color: #f4f4f4
+$active-color: #fff
+$text-color: #666
+
+// text colot
+$opentabby-color-text-unactive: $text-color
+$opentabby-color-text-active: $main-color
+
+$opentabby-color-bg-tab-active: $active-color
+$opentabby-color-bg-tab-unactive: $bg-color
+
+$opentabby-color-bg-nav: $bg-color
+
+$opentabby-spacing: 3.5rem
+
+// - Your themes, personalize here.
+.openTabby
+
+  // default view theme
+  .openTabby--nav
+    background: $opentabby-color-bg-nav
+    ul
+      padding: $opentabby-spacing $opentabby-spacing 0
+      float: left
+      li
+        line-height: $opentabby-spacing
+        padding: 0 $opentabby-spacing/3
+        background: $opentabby-color-bg-tab-unactive
+        color: $opentabby-color-text-unactive
+        &:hover
+          color: $opentabby-color-text-active - 80
+        &.active
+          font-weight: 600
+          color: $opentabby-color-text-active
+          background: $opentabby-color-bg-tab-active
+
+  .openTabby--slidesContainer
+    background-color: $opentabby-color-bg-tab-active
+    .openTabby--slide
+      padding: $opentabby-spacing
+      background: $opentabby-color-bg-tab-active
+      color: $text-color
+
+  // - accordion theme
+  &.accordion
+    .openTabby--nav
+      ul
+        padding: $opentabby-spacing
+        li
+    .openTabby--slidesContainer
+      .openTabby--slide

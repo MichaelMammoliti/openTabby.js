@@ -1,0 +1,29 @@
+.openTabby,
+.openTabby *
+  box-sizing: border-box
+
+.openTabby
+  overflow: hidden
+  .openTabby--nav
+    position: relative
+    display: none
+    width: 10000px
+    +clearfix
+    ul
+      display: table
+      +clearfix
+      li
+        float: left
+        cursor: pointer
+        list-style: none
+        &.active
+          cursor: default
+
+  .openTabby--slidesContainer
+    display: table
+    position: relative
+    overflow: scroll
+    .openTabby--slide
+      width: 100%
+      overflow: scroll
+

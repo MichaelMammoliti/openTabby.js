@@ -1,0 +1,213 @@
+// - CONFIGURATIONS
+$opentabby-animation-speed: .3s
+
+// - UTILS
+=clearfix
+  &:after
+    display: block
+    content: ""
+    clear: both
+
+=prefix($property, $value)
+  -webkit-#{$property}: #{$value}
+  -ms-#{$property}: #{$value}
+  -moz-#{$property}: #{$value}
+  -o-#{$property}: #{$value}
+  #{$property}: #{$value}
+
+=transition($property: "all", $speed: $opentabby-animation-speed, $curve: "ease", $delay: 0s)
+  +prefix(transition, #{$property} #{$speed} #{$curve} #{$delay} )
+
+
+// - BASE
+.openTabby,
+.openTabby *
+  box-sizing: border-box
+
+.openTabby
+  overflow: hidden
+  .openTabby--nav
+    position: relative
+    display: none
+    width: 10000px
+    +clearfix
+    ul
+      display: table
+      +clearfix
+      li
+        float: left
+        cursor: pointer
+        list-style: none
+        &.active
+          cursor: default
+
+  .openTabby--slidesContainer
+    display: table
+    position: relative
+    overflow: scroll
+    .openTabby--slide
+      width: 100%
+      overflow: scroll
+
+
+// - ACCORDION
+.js
+  .openTabby
+    &.accordion
+      .openTabby--nav
+        width: auto
+        ul
+          width: 100%
+          li
+            width: 100%
+            float: none
+            display: block
+            text-align: center
+
+// - JS OPTIMISATIONS
+.js
+  .openTabby
+    .openTabby--nav
+      display: block
+    .openTabby--slidesContainer
+      display: block
+      .openTabby--slide
+        position: absolute
+        top: 0
+        left: 0
+        opacity: 0
+        &.active
+          opacity: 1
+          z-index: 1
+
+
+// - RESPONSIVE
+.js
+  .openTabby
+    &.responsive
+      .openTabby--slidesContainer
+        overflow: hidden
+        .openTabby--slide
+          display: table
+          overflow: hidden
+
+
+
+// - TRANSITIONS
+.js
+  .openTabby
+    &.csstransitions
+      .openTabby--nav
+        ul
+          li
+            +transition
+      .openTabby--slidesContainer
+        +transition
+        .openTabby--slide
+          +transition
+
+// - EFFECTS
+.openTabby
+  .effect-fade
+    .openTabby--slide
+      opacity: 0
+      &.active
+        opacity: 1
+  .effect-shrink
+    .openTabby--slide
+      +prefix( transform, scale(.6) )
+      &.active
+        +prefix( transform, scale(1) )
+  .effect-grow
+    .openTabby--slide
+      +prefix( transform, scale(1.4) )
+      &.active
+        +prefix( transform, scale(1) )
+  .effect-slide-left
+    .openTabby--slide
+      +prefix( transform, translate(-100%, 0) )
+      &.active
+        +prefix( transform, translate(0, 0) )
+  .effect-slide-right
+    .openTabby--slide
+      +prefix( transform, translate(100%, 0) )
+      &.active
+        +prefix( transform, translate(0, 0) )
+  .effect-slide-up
+    .openTabby--slide
+      +prefix( transform, translate(0, 100%) )
+      &.active
+        +prefix( transform, translate(0, 0) )
+  .effect-slide-down
+    .openTabby--slide
+      +prefix( transform, translate(0, -100%) )
+      &.active
+        +prefix( transform, translate(0, 0) )
+  .effect-flip-vertical
+    .openTabby--slide
+      +prefix( transform, rotateX(180deg) )
+      &.active
+        +prefix( transform, rotateX(0) )
+  .effect-flip-horizontal
+    .openTabby--slide
+      +prefix( transform, rotateY(180deg) )
+      &.active
+        +prefix( transform, rotateY(0) )
+  .effect-rotate
+    .openTabby--slide
+      +prefix( transform, rotateZ(360deg) )
+      &.active
+        +prefix( transform, rotateZ(0) )
+
+
+
+// - THEME
+$main-color: #8CEE8C
+$bg-color: #f4f4f4
+$active-color: #fff
+$text-color: #666
+
+$opentabby-color-text-unactive: $text-color
+$opentabby-color-text-active: $main-color
+
+$opentabby-color-bg-tab-active: $active-color
+$opentabby-color-bg-tab-unactive: $bg-color
+
+$opentabby-color-bg-nav: $bg-color
+
+$opentabby-spacing: 3.5rem
+
+.openTabby
+  // - Default view
+  .openTabby--nav
+    background: $opentabby-color-bg-nav
+    ul
+      padding: $opentabby-spacing $opentabby-spacing 0
+      float: left
+      li
+        line-height: $opentabby-spacing
+        padding: 0 $opentabby-spacing/3
+        background: $opentabby-color-bg-tab-unactive
+        color: $opentabby-color-text-unactive
+        &:hover
+          color: $opentabby-color-text-active - 80
+        &.active
+          font-weight: 600
+          color: $opentabby-color-text-active
+          background: $opentabby-color-bg-tab-active
+
+  .openTabby--slidesContainer
+    background-color: $opentabby-color-bg-tab-active
+    .openTabby--slide
+      padding: $opentabby-spacing
+      background: $opentabby-color-bg-tab-active
+      color: $text-color
+
+  // - Accordion view
+  &.accordion
+    .openTabby--nav
+      ul
+        padding: $opentabby-spacing
+        li
+    .openTabby--slidesContainer
+      .openTabby--slide
